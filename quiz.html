@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz - Kids Learning Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header"><h1>Take a Quiz!</h1></div>
+  <div class="content">
+    <form id="quizForm">
+      <p><strong>1. What is 5 + 3?</strong><br>
+        <input type="radio" name="q1" value="a">6<br>
+        <input type="radio" name="q1" value="b">8<br>
+        <input type="radio" name="q1" value="c">9<br>
+      </p>
+      <p><strong>2. Which one is a verb?</strong><br>
+        <input type="radio" name="q2" value="a">happy<br>
+        <input type="radio" name="q2" value="b">run<br>
+        <input type="radio" name="q2" value="c">blue<br>
+      </p>
+      <p><strong>3. What does a plant need to make food?</strong><br>
+        <input type="radio" name="q3" value="a">sunlight<br>
+        <input type="radio" name="q3" value="b">chocolate<br>
+        <input type="radio" name="q3" value="c">soda<br>
+      </p>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="result"></p>
+  </div>
+  <script>
+    document.getElementById('quizForm').onsubmit = function(e) {
+      e.preventDefault();
+      let score = 0;
+      if(document.querySelector('input[name="q1"]:checked')?.value === 'b') score++;
+      if(document.querySelector('input[name="q2"]:checked')?.value === 'b') score++;
+      if(document.querySelector('input[name="q3"]:checked')?.value === 'a') score++;
+      document.getElementById('result').innerText = 'You scored ' + score + ' out of 3!';
+    };
+  </script>
+</body>
+</html>

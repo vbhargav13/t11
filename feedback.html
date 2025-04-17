@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback - Kids Learning Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header"><h1>Give Your Feedback</h1></div>
+  <div class="content">
+    <form id="feedbackForm">
+      <label>Your Name: <input type="text" id="fname"></label><br><br>
+      <label>Subject: 
+        <select id="fsubject">
+          <option>Math</option>
+          <option>English</option>
+          <option>Science</option>
+        </select>
+      </label><br><br>
+      <label>Feedback:<br>
+        <textarea id="fmessage" rows="4" cols="40"></textarea>
+      </label><br><br>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="foutput"></p>
+  </div>
+  <script>
+    document.getElementById('feedbackForm').onsubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById('fname').value;
+      const subject = document.getElementById('fsubject').value;
+      const message = document.getElementById('fmessage').value;
+      document.getElementById('foutput').innerText = `Thanks, ${name}! Your feedback on ${subject} has been received.`;
+    };
+  </script>
+</body>
+</html>
