@@ -55,3 +55,28 @@ footer {
     text-align: center;
     margin-top: 20px;
 }
+
+
+body {
+    background-color: #f0f8ff; /* Light blue background */
+    font-family: Arial, sans-serif;
+}
+
+.avatar {
+    width: 100px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.img-placeholder {
+    width: 200px;
+    height: 150px;
+    background-color: #ddd;
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+    line-height: 150px;
+    color: #666;
+    font-size: 14px;
+    border: 2px dashed #999;
+}
