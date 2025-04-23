@@ -1,26 +1,115 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Kids Learning Portal</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .planner-table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .planner-table th, .planner-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .planner-table th {
+            background-color: #74ebd5;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .planner-table td input {
+            width: 90%;
+            padding: 6px;
+            font-size: 14px;
+        }
+
+        #subjectLinks {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #subjectLinks a {
+            margin: 0 15px;
+            font-weight: bold;
+            color: #0077cc;
+            text-decoration: none;
+        }
+
+        #subjectCell {
+            font-style: italic;
+        }
+
+        .card-row {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 <body>
-       <div style="text-align:center;">
-            <img src="images/avatar.jpg" class="img-placeholder">
-        </div>
-        
-<div class="header" style="background: linear-gradient(to right, #74ebd5, #ACB6E5); padding: 20px;">
-    <h1 id="welcome">Welcome, Student!</h1>
-</div>
-<div class="cards">
-    <a href="math.html" class="card math">Math</a>
-    <a href="english.html" class="card english">English</a>
-    <a href="science.html" class="card science">Science</a>
-    <a href="quiz.html" class="card quiz">Quiz</a>
-    <a href="feedback.html" class="card feedback">Feedback</a>
-</div>
-<script src="script.js"></script>
+    <div style="text-align:center;">
+        <img src="images/avatar.jpg" class="img-placeholder">
+    </div>
+
+    <div class="header" style="background: linear-gradient(to right, #74ebd5, #ACB6E5); padding: 20px;">
+        <h1 id="welcome">Welcome, Student!</h1>
+    </div>
+
+    <!-- Daily Planner Table -->
+    <h2 style="text-align:center; margin-top:30px;">📅 Daily Planner</h2>
+    <table class="planner-table">
+        <tr>
+            <th>School Class</th>
+            <th><button onclick="toggleSubjects()">98th Percentile</button></th>
+            <th>Play Time</th>
+            <th>Homework Time</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+        </tr>
+        <tr>
+            <td><input type="text" placeholder="e.g. Class 6" /></td>
+            <td id="subjectCell">Click Above</td>
+            <td><input type="text" placeholder="e.g. 5-6 PM" /></td>
+            <td><input type="text" placeholder="e.g. 6-7 PM" /></td>
+            <td><input type="text" placeholder="e.g. 8 AM" /></td>
+            <td><input type="text" placeholder="e.g. 1 PM" /></td>
+            <td><input type="text" placeholder="e.g. 8 PM" /></td>
+        </tr>
+    </table>
+
+    <!-- Revealed only after clicking 98th Percentile -->
+    <div id="subjectLinks">
+        <a href="math.html">Math</a>
+        <a href="english.html">English</a>
+        <a href="science.html">Science</a>
+    </div>
+
+    <!-- Existing Cards -->
+    <div class="cards">
+        <a href="math.html" class="card math">Math</a>
+        <a href="english.html" class="card english">English</a>
+        <a href="science.html" class="card science">Science</a>
+        <a href="quiz.html" class="card quiz">Quiz</a>
+        <a href="feedback.html" class="card feedback">Feedback</a>
+    </div>
+
+    <script>
+        function toggleSubjects() {
+            document.getElementById("subjectLinks").style.display = "block";
+            document.getElementById("subjectCell").innerHTML = "Math, English, Science";
+        }
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
