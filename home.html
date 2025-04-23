@@ -1,115 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - Kids Learning Portal</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .planner-table {
-            width: 90%;
-            margin: 30px auto;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        }
+  <meta charset="UTF-8">
+  <title>Dashboard - Kids Learning Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .timetable-container {
+      width: 95%;
+      margin: 30px auto;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
 
-        .planner-table th, .planner-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
+    .timetable-table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
 
-        .planner-table th {
-            background-color: #74ebd5;
-            color: #333;
-            font-size: 18px;
-        }
+    .timetable-table th, .timetable-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+    }
 
-        .planner-table td input {
-            width: 90%;
-            padding: 6px;
-            font-size: 14px;
-        }
+    .timetable-table th {
+      background-color: #f7c59f;
+      color: #333;
+      font-size: 18px;
+    }
 
-        #subjectLinks {
-            display: none;
-            margin-top: 20px;
-            text-align: center;
-        }
+    .timetable-table td {
+      font-size: 16px;
+      background-color: #fdfdfd;
+    }
 
-        #subjectLinks a {
-            margin: 0 15px;
-            font-weight: bold;
-            color: #0077cc;
-            text-decoration: none;
-        }
+    .timetable-table a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #2b7a78;
+    }
 
-        #subjectCell {
-            font-style: italic;
-        }
-
-        .card-row {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-    </style>
+    .header {
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <div style="text-align:center;">
-        <img src="images/avatar.jpg" class="img-placeholder">
-    </div>
+  <div style="text-align:center;">
+    <img src="images/avatar.jpg" class="img-placeholder">
+  </div>
 
-    <div class="header" style="background: linear-gradient(to right, #74ebd5, #ACB6E5); padding: 20px;">
-        <h1 id="welcome">Welcome, Student!</h1>
-    </div>
+  <div class="header">
+    <h1 id="welcome">Welcome, Grade 5 Student!</h1>
+  </div>
 
-    <!-- Daily Planner Table -->
-    <h2 style="text-align:center; margin-top:30px;">📅 Daily Planner</h2>
-    <table class="planner-table">
-        <tr>
-            <th>School Class</th>
-            <th><button onclick="toggleSubjects()">98th Percentile</button></th>
-            <th>Play Time</th>
-            <th>Homework Time</th>
-            <th>Breakfast</th>
-            <th>Lunch</th>
-            <th>Dinner</th>
-        </tr>
-        <tr>
-            <td><input type="text" placeholder="e.g. Class 6" /></td>
-            <td id="subjectCell">Click Above</td>
-            <td><input type="text" placeholder="e.g. 5-6 PM" /></td>
-            <td><input type="text" placeholder="e.g. 6-7 PM" /></td>
-            <td><input type="text" placeholder="e.g. 8 AM" /></td>
-            <td><input type="text" placeholder="e.g. 1 PM" /></td>
-            <td><input type="text" placeholder="e.g. 8 PM" /></td>
-        </tr>
+  <!-- Grade 5 Weekly Timetable -->
+  <div class="timetable-container">
+    <h2>📘 Grade 5 Weekly Timetable</h2>
+    <table class="timetable-table">
+      <tr>
+        <th>Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+      </tr>
+      <tr>
+        <td>10:00 - 11:00 AM</td>
+        <td><a href="math.html">98thPercentile Math</a></td>
+        <td><a href="science.html">98thPercentile Science</a></td>
+        <td><a href="english.html">98thPercentile English</a></td>
+        <td><a href="math.html">98thPercentile Math</a></td>
+        <td><a href="science.html">98thPercentile Science</a></td>
+      </tr>
+      <tr>
+        <td>11:00 - 12:00 PM</td>
+        <td>Reading Time</td>
+        <td>Practice Questions</td>
+        <td>Story Writing</td>
+        <td>Revision</td>
+        <td>Quiz</td>
+      </tr>
+      <tr>
+        <td>12:00 - 1:00 PM</td>
+        <td colspan="5">Lunch Break 🍱</td>
+      </tr>
+      <tr>
+        <td>1:00 - 2:00 PM</td>
+        <td>Games</td>
+        <td>Art & Craft</td>
+        <td>Music</td>
+        <td>Reading</td>
+        <td>Project Work</td>
+      </tr>
+      <tr>
+        <td>2:00 - 3:00 PM</td>
+        <td>Self Study</td>
+        <td>Self Study</td>
+        <td>Self Study</td>
+        <td>Self Study</td>
+        <td>Self Study</td>
+      </tr>
+      <tr>
+        <td>3:00 - 4:00 PM</td>
+        <td>Homework</td>
+        <td>Homework</td>
+        <td>Homework</td>
+        <td>Homework</td>
+        <td>Homework</td>
+      </tr>
+      <tr>
+        <td>4:00 - 5:00 PM</td>
+        <td>Play Time</td>
+        <td>Play Time</td>
+        <td>Play Time</td>
+        <td>Play Time</td>
+        <td>Play Time</td>
+      </tr>
     </table>
+  </div>
 
-    <!-- Revealed only after clicking 98th Percentile -->
-    <div id="subjectLinks">
-        <a href="math.html">Math</a>
-        <a href="english.html">English</a>
-        <a href="science.html">Science</a>
-    </div>
+  <!-- Existing Navigation Cards -->
+  <div class="cards">
+    <a href="math.html" class="card math">Math</a>
+    <a href="english.html" class="card english">English</a>
+    <a href="science.html" class="card science">Science</a>
+    <a href="quiz.html" class="card quiz">Quiz</a>
+    <a href="feedback.html" class="card feedback">Feedback</a>
+  </div>
 
-    <!-- Existing Cards -->
-    <div class="cards">
-        <a href="math.html" class="card math">Math</a>
-        <a href="english.html" class="card english">English</a>
-        <a href="science.html" class="card science">Science</a>
-        <a href="quiz.html" class="card quiz">Quiz</a>
-        <a href="feedback.html" class="card feedback">Feedback</a>
-    </div>
-
-    <script>
-        function toggleSubjects() {
-            document.getElementById("subjectLinks").style.display = "block";
-            document.getElementById("subjectCell").innerHTML = "Math, English, Science";
-        }
-    </script>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
