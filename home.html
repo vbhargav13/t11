@@ -8,7 +8,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      position: relative;
       background: #f0f4f8;
     }
     .header {
@@ -23,7 +22,6 @@
       font-size: 2em;
       font-weight: 600;
     }
-    /* QUIZ & FEEDBACK CARDS */
     .cards {
       position: absolute;
       top: 20px;
@@ -32,7 +30,6 @@
       gap: 12px;
     }
     .card {
-      display: inline-block;
       padding: 10px 18px;
       border-radius: 8px;
       font-size: 1rem;
@@ -52,15 +49,16 @@
       background: linear-gradient(135deg, #96fbc4, #f9f586);
       color: #333;
     }
-    /* AVATAR */
     .img-placeholder {
       width: 80px;
       height: auto;
       border-radius: 50%;
       margin-top: 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-    /* TIMETABLE STYLES */
     .timetable-container {
       width: 95%;
       margin: 30px auto;
@@ -120,9 +118,7 @@
   </style>
 </head>
 <body>
-  <div style="text-align:center;">
-    <img src="images/avatar.jpg" alt="Avatar" class="img-placeholder">
-  </div>
+  <img src="images/avatar.jpg" alt="Avatar" class="img-placeholder">
 
   <div class="header">
     <h1 id="welcome">Welcome, Grade 5 Student!</h1>
@@ -139,7 +135,70 @@
       <button onclick="saveChanges()">Save</button>
     </div>
     <table class="timetable-table" id="timetable">
-      <!-- ... your existing table markup ... -->
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>10:00 - 11:00 AM</td>
+          <td><a href="math.html">98thPercentile Math</a></td>
+          <td><a href="science.html">98thPercentile Science</a></td>
+          <td><a href="english.html">98thPercentile English</a></td>
+          <td><a href="math.html">98thPercentile Math</a></td>
+          <td><a href="science.html">98thPercentile Science</a></td>
+        </tr>
+        <tr>
+          <td>11:00 - 12:00 PM</td>
+          <td><a href="english.html">98thPercentile English</a></td>
+          <td>Group Reading</td>
+          <td><a href="math.html">98thPercentile Math</a></td>
+          <td>Story Time</td>
+          <td><a href="english.html">98thPercentile English</a></td>
+        </tr>
+        <tr>
+          <td>12:00 - 1:00 PM</td>
+          <td colspan="5">Lunch Break 🍱</td>
+        </tr>
+        <tr>
+          <td>1:00 - 2:00 PM</td>
+          <td>Games</td>
+          <td><a href="science.html">98thPercentile Science</a></td>
+          <td>Music</td>
+          <td>Art & Craft</td>
+          <td>Reading Time</td>
+        </tr>
+        <tr>
+          <td>03:00 - 04:00 PM</td>
+          <td><a href="math.html">98thPercentile Math</a></td>
+          <td><a href="science.html">98thPercentile Science</a></td>
+          <td>Music</td>
+          <td>Art & Craft</td>
+          <td><a href="math.html">98thPercentile Math</a></td>
+        </tr>
+        <tr>
+          <td>04:00 - 05:00 PM</td>
+          <td>Music</td>
+          <td>Art & Craft</td>
+          <td><a href="math.html">98thPercentile Math</a></td>
+          <td><a href="science.html">98thPercentile Science</a></td>
+          <td>Art & Craft</td>
+        </tr>
+        <tr>
+          <td>05:00 - 06:00 PM</td>
+          <td><a href="english.html">98thPercentile English</a></td>
+          <td><a href="math.html">98thPercentile Math</a></td>
+          <td>Music</td>
+          <td>Art & Craft</td>
+          <td><a href="math.html">98thPercentile Math</a></td>
+        </tr>
+      </tbody>
     </table>
   </div>
 
