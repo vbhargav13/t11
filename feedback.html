@@ -1,40 +1,135 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Feedback - Kids Learning Portal</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback – Kids Learning Portal</title>
+  <style>
+    /* Base reset & font */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      padding: 30px 20px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    /* Card container */
+    .feedback-container {
+      max-width: 500px;
+      margin: -40px auto 40px;
+      background: white;
+      padding: 30px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    /* Form groups */
+    .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #74ebd5;
+      box-shadow: 0 0 6px rgba(116,235,213,0.5);
+      outline: none;
+    }
+
+    /* Submit button */
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333;
+      background: linear-gradient(135deg, #96fbc4, #f9f586);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #f9f586, #96fbc4);
+      transform: translateY(-2px);
+    }
+
+    /* Output message */
+    .output {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #205a55;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 
-        
-  <div class="header"><h1>Give Your Feedback</h1></div>
-  <div class="content">
+  <div class="header">
+    <h1>Give Your Feedback</h1>
+  </div>
+
+  <div class="feedback-container">
     <form id="feedbackForm">
-      <label>Your Name: <input type="text" id="fname"></label><br><br>
-      <label>Subject: 
+      <div class="form-group">
+        <label for="fname">Your Name</label>
+        <input type="text" id="fname" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="fsubject">Subject</label>
         <select id="fsubject">
           <option>Math</option>
           <option>English</option>
           <option>Science</option>
         </select>
-      </label><br><br>
-      <label>Feedback:<br>
-        <textarea id="fmessage" rows="4" cols="40"></textarea>
-      </label><br><br>
-      <button type="submit">Submit</button>
+      </div>
+      <div class="form-group">
+        <label for="fmessage">Feedback</label>
+        <textarea id="fmessage" rows="4" placeholder="Write your feedback here…" required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Submit Feedback</button>
     </form>
-    <p id="foutput"></p>
+    <p id="foutput" class="output"></p>
   </div>
+
   <script>
     document.getElementById('feedbackForm').onsubmit = function(e) {
       e.preventDefault();
-      const name = document.getElementById('fname').value;
+      const name = document.getElementById('fname').value.trim();
       const subject = document.getElementById('fsubject').value;
-      const message = document.getElementById('fmessage').value;
-      document.getElementById('foutput').innerText = `Thanks, ${name}! Your feedback on ${subject} has been received.`;
+      document.getElementById('foutput').innerText =
+        `👍 Thanks, ${name}! Your feedback on ${subject} has been received.`;
+      this.reset();
     };
   </script>
+
 </body>
 </html>
