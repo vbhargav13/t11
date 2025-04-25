@@ -10,63 +10,56 @@
       font-family: Arial, sans-serif;
       text-align: center;
     }
-
     .timetable-table {
       width: 100%;
       border-collapse: collapse;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     .timetable-table th, .timetable-table td {
       border: 1px solid #ddd;
       padding: 12px;
+      vertical-align: middle;
     }
-
     .timetable-table th {
       background-color: #f7c59f;
       color: #333;
       font-size: 18px;
     }
-
     .timetable-table td {
       font-size: 16px;
       background-color: #fdfdfd;
-      position: relative;
     }
-
     .timetable-table a {
       text-decoration: none;
       font-weight: bold;
       color: #2b7a78;
     }
-
     .header {
       background: linear-gradient(to right, #74ebd5, #ACB6E5);
       padding: 20px;
       text-align: center;
     }
-
     .button-container {
       margin: 20px;
     }
-
     button {
       padding: 10px 20px;
       margin: 0 10px;
       font-size: 16px;
       cursor: pointer;
     }
-
     select {
-      font-size: 16px;
-      padding: 6px;
       width: 100%;
+      padding: 6px;
+      font-size: 16px;
+      border: 1px solid #333;
+      background: #fff;
     }
   </style>
 </head>
 <body>
   <div style="text-align:center;">
-    <img src="images/avatar.jpg" class="img-placeholder" alt="Avatar">
+    <img src="images/avatar.jpg" alt="Avatar" class="img-placeholder">
   </div>
 
   <div class="header">
@@ -74,10 +67,10 @@
   </div>
 
   <div class="timetable-container">
-    <h2>📘 Grade 5 Weekly Planner.</h2>
+    <h2>📘 Grade 5 Weekly Planner..</h2>
     <div class="button-container">
-      <button id="editBtn">Edit</button>
-      <button id="saveBtn">Save</button>
+      <button onclick="enableEdit()">Edit</button>
+      <button onclick="saveChanges()">Save</button>
     </div>
     <table class="timetable-table" id="timetable">
       <thead>
@@ -136,57 +129,45 @@
       { name: "Reading Time", link: "" }
     ];
 
-    document.getElementById("editBtn").addEventListener("click", enableEdit);
-    document.getElementById("saveBtn").addEventListener("click", saveChanges);
-
-    function getTextContent(cell) {
-      const link = cell.querySelector('a');
-      return link ? link.textContent.trim() : cell.textContent.trim();
-    }
-
     function enableEdit() {
-      const rows = document.querySelectorAll("#timetable tbody tr");
-      rows.forEach(row => {
-        row.querySelectorAll('td').forEach((cell, index) => {
-          if (index === 0) return; // skip time column
-          if (cell.colSpan > 1) return; // skip lunch row
-          const currentText = getTextContent(cell);
-          const select = document.createElement("select");
-          subjects.forEach(subject => {
-            const opt = document.createElement("option");
-            opt.value = subject.name;
-            opt.textContent = subject.name;
-            if (subject.name === currentText) opt.selected = true;
+      console.log('Editing enabled');
+      const table = document.getElementById('timetable');
+      for (let r = 1; r < table.rows.length; r++) {
+        const row = table.rows[r];
+        for (let c = 1; c < row.cells.length; c++) {
+          const cell = row.cells[c];
+          if (cell.colSpan > 1) continue;
+          const text = cell.innerText.trim();
+          const select = document.createElement('select');
+          subjects.forEach(sub => {
+            const opt = document.createElement('option');
+            opt.value = sub.name;
+            opt.textContent = sub.name;
+            if (sub.name === text) opt.selected = true;
             select.appendChild(opt);
           });
-          cell.textContent = '';
+          cell.innerHTML = '';
           cell.appendChild(select);
-        });
-      });
+        }
+      }
     }
 
     function saveChanges() {
-      const rows = document.querySelectorAll("#timetable tbody tr");
-      rows.forEach(row => {
-        row.querySelectorAll('td').forEach((cell, index) => {
-          if (index === 0) return;
-          if (cell.colSpan > 1) return;
+      console.log('Saving changes');
+      const table = document.getElementById('timetable');
+      for (let r = 1; r < table.rows.length; r++) {
+        const row = table.rows[r];
+        for (let c = 1; c < row.cells.length; c++) {
+          const cell = row.cells[c];
+          if (cell.colSpan > 1) continue;
           const select = cell.querySelector('select');
           if (select) {
-            const selected = select.value;
-            const subj = subjects.find(s => s.name === selected);
-            cell.textContent = '';
-            if (subj.link) {
-              const a = document.createElement('a');
-              a.href = subj.link;
-              a.textContent = subj.name;
-              cell.appendChild(a);
-            } else {
-              cell.textContent = subj.name;
-            }
+            const val = select.value;
+            const subj = subjects.find(s => s.name === val);
+            cell.innerHTML = subj.link ? `<a href="${subj.link}">${subj.name}</a>` : subj.name;
           }
-        });
-      });
+        }
+      }
     }
   </script>
 </body>
