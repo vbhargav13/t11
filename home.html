@@ -45,6 +45,17 @@
       padding: 20px;
       text-align: center;
     }
+
+    .button-container {
+      margin: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -58,7 +69,11 @@
 
   <div class="timetable-container">
     <h2>📘 Grade 5 Weekly Planner.</h2>
-    <table class="timetable-table">
+    <div class="button-container">
+      <button onclick="enableEdit()">Edit</button>
+      <button onclick="saveChanges()">Save</button>
+    </div>
+    <table class="timetable-table" id="timetable">
       <tr>
         <th>Time</th>
         <th>Monday</th>
@@ -69,19 +84,19 @@
       </tr>
       <tr>
         <td>10:00 - 11:00 AM</td>
-        <td><a href="math.html">98thPercentile Math</a></td>
-        <td><a href="science.html">98thPercentile Science</a></td>
-        <td><a href="english.html">98thPercentile English</a></td>
-        <td><a href="math.html">98thPercentile Math</a></td>
-        <td><a href="science.html">98thPercentile Science</a></td>
+        <td>Math</td>
+        <td>Science</td>
+        <td>English</td>
+        <td>Math</td>
+        <td>Science</td>
       </tr>
       <tr>
         <td>11:00 - 12:00 PM</td>
-        <td><a href="english.html">98thPercentile English</a></td>
+        <td>English</td>
         <td>Group Reading</td>
-        <td><a href="math.html">98thPercentile Math</a></td>
+        <td>Math</td>
         <td>Story Time</td>
-        <td><a href="english.html">98thPercentile English</a></td>
+        <td>English</td>
       </tr>
       <tr>
         <td>12:00 - 1:00 PM</td>
@@ -90,47 +105,51 @@
       <tr>
         <td>1:00 - 2:00 PM</td>
         <td>Games</td>
-        <td><a href="science.html">98thPercentile Science</a></td>
+        <td>Science</td>
         <td>Music</td>
         <td>Art & Craft</td>
         <td>Reading Time</td>
       </tr>
-      <tr>
-        <td>2:00 - 3:00 PM</td>
-        <td><a href="math.html">98thPercentile Math</a></td>
-        <td>Self Study</td>
-        <td><a href="english.html">98thPercentile English</a></td>
-        <td>Self Study</td>
-        <td>Project Time</td>
-      </tr>
-      <tr>
-        <td>3:00 - 4:00 PM</td>
-        <td>Homework</td>
-        <td>Homework</td>
-     <td><a href="english.html">98thPercentile English</a></td>
-        <td>Homework</td>
-        <td><a href="math.html">98thPercentile Math</a></td>
-      </tr>
-      <tr>
-        <td>4:00 - 5:00 PM</td>
-       <td><a href="science.html">98thPercentile Science</a></td>
-        <td>Play Time</td>
-         <td><a href="math.html">98thPercentile Math</a></td>
-        <td>Play Time</td>
-        <td><a href="english.html">98thPercentile English</a></td>
-      </tr>
     </table>
-    <hr style="border: 2px solid #aaa; width: 90%; margin: 40px auto;">
   </div>
 
-  <div class="cards">
-    <a href="math.html" class="card math">Math</a>
-    <a href="english.html" class="card english">English</a>
-    <a href="science.html" class="card science">Science</a>
-    <a href="quiz.html" class="card quiz">Quiz</a>
-    <a href="feedback.html" class="card feedback">Feedback</a>
-  </div>
+  <script>
+    const subjects = ["Math", "Science", "English", "Group Reading", "Story Time", "Games", "Music", "Art & Craft", "Reading Time"];
 
-  <script src="script.js"></script>
+    function enableEdit() {
+      const table = document.getElementById("timetable");
+      for (let i = 1; i < table.rows.length; i++) {
+        for (let j = 1; j < table.rows[i].cells.length; j++) {
+          let cell = table.rows[i].cells[j];
+          if (!cell.colSpan) {
+            const current = cell.innerText;
+            const select = document.createElement("select");
+            subjects.forEach(sub => {
+              const option = document.createElement("option");
+              option.value = sub;
+              option.text = sub;
+              if (sub === current) option.selected = true;
+              select.appendChild(option);
+            });
+            cell.innerHTML = '';
+            cell.appendChild(select);
+          }
+        }
+      }
+    }
+
+    function saveChanges() {
+      const table = document.getElementById("timetable");
+      for (let i = 1; i < table.rows.length; i++) {
+        for (let j = 1; j < table.rows[i].cells.length; j++) {
+          let cell = table.rows[i].cells[j];
+          if (cell.firstChild && cell.firstChild.tagName === 'SELECT') {
+            const selected = cell.firstChild.value;
+            cell.innerHTML = selected;
+          }
+        }
+      }
+    }
+  </script>
 </body>
 </html>
