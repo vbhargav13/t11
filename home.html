@@ -69,46 +69,50 @@
   <div class="timetable-container">
     <h2>📘 Grade 5 Weekly Planner.</h2>
     <div class="button-container">
-      <button onclick="enableEdit()">Edit</button>
-      <button onclick="saveChanges()">Save</button>
+      <button id="editBtn">Edit</button>
+      <button id="saveBtn">Save</button>
     </div>
     <table class="timetable-table" id="timetable">
-      <tr>
-        <th>Time</th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-      </tr>
-      <tr>
-        <td>10:00 - 11:00 AM</td>
-        <td><a href="math.html">Math</a></td>
-        <td><a href="science.html">Science</a></td>
-        <td><a href="english.html">English</a></td>
-        <td><a href="math.html">Math</a></td>
-        <td><a href="science.html">Science</a></td>
-      </tr>
-      <tr>
-        <td>11:00 - 12:00 PM</td>
-        <td><a href="english.html">English</a></td>
-        <td>Group Reading</td>
-        <td><a href="math.html">Math</a></td>
-        <td>Story Time</td>
-        <td><a href="english.html">English</a></td>
-      </tr>
-      <tr>
-        <td>12:00 - 1:00 PM</td>
-        <td colspan="5">Lunch Break 🍱</td>
-      </tr>
-      <tr>
-        <td>1:00 - 2:00 PM</td>
-        <td>Games</td>
-        <td><a href="science.html">Science</a></td>
-        <td>Music</td>
-        <td>Art & Craft</td>
-        <td>Reading Time</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>10:00 - 11:00 AM</td>
+          <td><a href="math.html">Math</a></td>
+          <td><a href="science.html">Science</a></td>
+          <td><a href="english.html">English</a></td>
+          <td><a href="math.html">Math</a></td>
+          <td><a href="science.html">Science</a></td>
+        </tr>
+        <tr>
+          <td>11:00 - 12:00 PM</td>
+          <td><a href="english.html">English</a></td>
+          <td>Group Reading</td>
+          <td><a href="math.html">Math</a></td>
+          <td>Story Time</td>
+          <td><a href="english.html">English</a></td>
+        </tr>
+        <tr>
+          <td>12:00 - 1:00 PM</td>
+          <td colspan="5">Lunch Break 🍱</td>
+        </tr>
+        <tr>
+          <td>1:00 - 2:00 PM</td>
+          <td>Games</td>
+          <td><a href="science.html">Science</a></td>
+          <td>Music</td>
+          <td>Art & Craft</td>
+          <td>Reading Time</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 
@@ -125,22 +129,25 @@
       { name: "Reading Time", link: "" }
     ];
 
+    document.getElementById("editBtn").addEventListener("click", enableEdit);
+    document.getElementById("saveBtn").addEventListener("click", saveChanges);
+
     function enableEdit() {
-      const table = document.getElementById("timetable");
-      for (let i = 1; i < table.rows.length; i++) {
+      const table = document.getElementById("timetable").getElementsByTagName("tbody")[0];
+      for (let i = 0; i < table.rows.length; i++) {
         for (let j = 1; j < table.rows[i].cells.length; j++) {
           let cell = table.rows[i].cells[j];
           if (!cell.colSpan) {
-            let text = cell.innerText.trim();
+            let currentText = cell.textContent.trim();
             const select = document.createElement("select");
-            subjects.forEach(sub => {
+            subjects.forEach(subject => {
               const option = document.createElement("option");
-              option.value = sub.name;
-              option.text = sub.name;
-              if (sub.name === text) option.selected = true;
+              option.value = subject.name;
+              option.textContent = subject.name;
+              if (subject.name === currentText) option.selected = true;
               select.appendChild(option);
             });
-            cell.innerHTML = '';
+            cell.innerHTML = "";
             cell.appendChild(select);
           }
         }
@@ -148,13 +155,14 @@
     }
 
     function saveChanges() {
-      const table = document.getElementById("timetable");
-      for (let i = 1; i < table.rows.length; i++) {
+      const table = document.getElementById("timetable").getElementsByTagName("tbody")[0];
+      for (let i = 0; i < table.rows.length; i++) {
         for (let j = 1; j < table.rows[i].cells.length; j++) {
           let cell = table.rows[i].cells[j];
-          if (cell.firstChild && cell.firstChild.tagName === 'SELECT') {
-            const selected = cell.firstChild.value;
-            const subject = subjects.find(s => s.name === selected);
+          const select = cell.querySelector("select");
+          if (select) {
+            const selectedValue = select.value;
+            const subject = subjects.find(s => s.name === selectedValue);
             if (subject.link) {
               cell.innerHTML = `<a href="${subject.link}">${subject.name}</a>`;
             } else {
