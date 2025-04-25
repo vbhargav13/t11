@@ -31,6 +31,7 @@
     .timetable-table td {
       font-size: 16px;
       background-color: #fdfdfd;
+      position: relative;
     }
 
     .timetable-table a {
@@ -65,7 +66,7 @@
 </head>
 <body>
   <div style="text-align:center;">
-    <img src="images/avatar.jpg" class="img-placeholder">
+    <img src="images/avatar.jpg" class="img-placeholder" alt="Avatar">
   </div>
 
   <div class="header">
@@ -139,52 +140,53 @@
     document.getElementById("saveBtn").addEventListener("click", saveChanges);
 
     function getTextContent(cell) {
-      if (cell.querySelector('a')) {
-        return cell.querySelector('a').textContent.trim();
-      } else {
-        return cell.textContent.trim();
-      }
+      const link = cell.querySelector('a');
+      return link ? link.textContent.trim() : cell.textContent.trim();
     }
 
     function enableEdit() {
-      const table = document.getElementById("timetable").getElementsByTagName("tbody")[0];
-      for (let i = 0; i < table.rows.length; i++) {
-        for (let j = 1; j < table.rows[i].cells.length; j++) {
-          let cell = table.rows[i].cells[j];
-          if (!cell.colSpan) {
-            const currentText = getTextContent(cell);
-            const select = document.createElement("select");
-            subjects.forEach(subject => {
-              const option = document.createElement("option");
-              option.value = subject.name;
-              option.textContent = subject.name;
-              if (subject.name === currentText) option.selected = true;
-              select.appendChild(option);
-            });
-            cell.innerHTML = "";
-            cell.appendChild(select);
-          }
-        }
-      }
+      const rows = document.querySelectorAll("#timetable tbody tr");
+      rows.forEach(row => {
+        row.querySelectorAll('td').forEach((cell, index) => {
+          if (index === 0) return; // skip time column
+          if (cell.colSpan > 1) return; // skip lunch row
+          const currentText = getTextContent(cell);
+          const select = document.createElement("select");
+          subjects.forEach(subject => {
+            const opt = document.createElement("option");
+            opt.value = subject.name;
+            opt.textContent = subject.name;
+            if (subject.name === currentText) opt.selected = true;
+            select.appendChild(opt);
+          });
+          cell.textContent = '';
+          cell.appendChild(select);
+        });
+      });
     }
 
     function saveChanges() {
-      const table = document.getElementById("timetable").getElementsByTagName("tbody")[0];
-      for (let i = 0; i < table.rows.length; i++) {
-        for (let j = 1; j < table.rows[i].cells.length; j++) {
-          let cell = table.rows[i].cells[j];
-          const select = cell.querySelector("select");
+      const rows = document.querySelectorAll("#timetable tbody tr");
+      rows.forEach(row => {
+        row.querySelectorAll('td').forEach((cell, index) => {
+          if (index === 0) return;
+          if (cell.colSpan > 1) return;
+          const select = cell.querySelector('select');
           if (select) {
-            const selectedValue = select.value;
-            const subject = subjects.find(s => s.name === selectedValue);
-            if (subject.link) {
-              cell.innerHTML = `<a href="${subject.link}">${subject.name}</a>`;
+            const selected = select.value;
+            const subj = subjects.find(s => s.name === selected);
+            cell.textContent = '';
+            if (subj.link) {
+              const a = document.createElement('a');
+              a.href = subj.link;
+              a.textContent = subj.name;
+              cell.appendChild(a);
             } else {
-              cell.innerHTML = subject.name;
+              cell.textContent = subj.name;
             }
           }
-        }
-      }
+        });
+      });
     }
   </script>
 </body>
