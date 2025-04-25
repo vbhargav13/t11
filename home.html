@@ -55,6 +55,12 @@
       font-size: 16px;
       cursor: pointer;
     }
+
+    select {
+      font-size: 16px;
+      padding: 6px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -132,13 +138,21 @@
     document.getElementById("editBtn").addEventListener("click", enableEdit);
     document.getElementById("saveBtn").addEventListener("click", saveChanges);
 
+    function getTextContent(cell) {
+      if (cell.querySelector('a')) {
+        return cell.querySelector('a').textContent.trim();
+      } else {
+        return cell.textContent.trim();
+      }
+    }
+
     function enableEdit() {
       const table = document.getElementById("timetable").getElementsByTagName("tbody")[0];
       for (let i = 0; i < table.rows.length; i++) {
         for (let j = 1; j < table.rows[i].cells.length; j++) {
           let cell = table.rows[i].cells[j];
           if (!cell.colSpan) {
-            let currentText = cell.textContent.trim();
+            const currentText = getTextContent(cell);
             const select = document.createElement("select");
             subjects.forEach(subject => {
               const option = document.createElement("option");
