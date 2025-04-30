@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard - Kids Learning Portal</title>
+  <!-- Lesson 23: Launch & Showcase – After finalizing, create a GitHub repo, push all files, deploy via GitHub Pages, and verify the live link -->
   <style>
+    /* Lesson 22: UI enhancement/Troubleshooting – Ensure consistent CSS styling for layout, fonts, spacing, and visual polish */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -121,22 +123,25 @@
   <img src="images/avatar.jpg" alt="Avatar" class="img-placeholder">
 
   <div class="header">
-    <!-- The heading will be updated by script -->
+    <!-- Lesson 16: Dashboard Design – Build a dashboard-style homepage using <div> containers and flexbox for layout -->
+    <!-- Lesson 13: Welcome to Learning Portal – Heading will be personalized based on stored student data -->
     <h1 id="welcome">Welcome, Grade 5 Student!</h1>
     <div class="cards">
+      <!-- Lesson 20: Quiz Zone – Provide a link to the static quiz page using <a> and styled cards -->
       <a href="quiz.html" class="card quiz">Quiz</a>
+      <!-- Lesson 21: Feedback Form – Provide a link to the feedback form page using <a> and styled cards -->
       <a href="feedback.html" class="card feedback">Feedback</a>
     </div>
   </div>
 
-  <!-- Script to fetch the stored student name and update the welcome message -->
+  <!-- Lesson 13: Welcome to Learning Portal – Script to fetch and display the student’s name from localStorage -->
   <script>
     (function() {
-      // The key under which index.html saved the student’s name
+      // Lesson 14: Create Your Profile – The key under which the profile form saved the student’s name
       const nameKey = 'studentName';
-      // Retrieve the name from localStorage
+      // Lesson 13: Welcome to Learning Portal – Retrieve the student’s name from localStorage
       const studentName = localStorage.getItem(nameKey);
-      // If a name exists, update the welcome heading
+      // Lesson 13: Welcome to Learning Portal – If a name exists, update the welcome heading dynamically
       if (studentName) {
         const welcomeEl = document.getElementById('welcome');
         welcomeEl.textContent = `Welcome, ${studentName}!`;
@@ -146,9 +151,11 @@
 </body>
 
 
+  <!-- Lesson 22: UI enhancement/Troubleshooting – Weekly planner table using HTML <table>, styled and made interactive -->
   <div class="timetable-container">
     <h2>📘 Grade 5 Weekly Planner</h2>
     <div class="button-container">
+      <!-- Lesson 22: UI enhancement/Troubleshooting – Buttons to enable editing and save changes in the planner -->
       <button onclick="enableEdit()">Edit</button>
       <button onclick="saveChanges()">Save</button>
     </div>
@@ -221,6 +228,7 @@
   </div>
 
   <script>
+    // Lesson 22: UI enhancement/Troubleshooting – Define subjects list for dynamic planner edits
     const subjects = [
       { name: "98thPercentile Math", link: "math.html" },
       { name: "98thPercentile Science", link: "science.html" },
@@ -229,9 +237,10 @@
       { name: "Music", link: "" },
       { name: "Art & Craft", link: "" },
       { name: "Reading Time", link: "" },
-       { name: "Leisure", link: "" }
+      { name: "Leisure", link: "" }
     ];
 
+    // Lesson 22: UI enhancement/Troubleshooting – Enable editing of each cell by replacing text with a <select>
     function enableEdit() {
       const table = document.getElementById('timetable');
       for (let r = 1; r < table.rows.length; r++) {
@@ -254,6 +263,7 @@
       }
     }
 
+    // Lesson 22: UI enhancement/Troubleshooting – Save changes by converting <select> back to text or link
     function saveChanges() {
       const table = document.getElementById('timetable');
       for (let r = 1; r < table.rows.length; r++) {
