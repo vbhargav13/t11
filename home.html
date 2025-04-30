@@ -121,12 +121,30 @@
   <img src="images/avatar.jpg" alt="Avatar" class="img-placeholder">
 
   <div class="header">
+    <!-- The heading will be updated by script -->
     <h1 id="welcome">Welcome, Grade 5 Student!</h1>
     <div class="cards">
       <a href="quiz.html" class="card quiz">Quiz</a>
       <a href="feedback.html" class="card feedback">Feedback</a>
     </div>
   </div>
+
+  <!-- Script to fetch the stored student name and update the welcome message -->
+  <script>
+    (function() {
+      // The key under which index.html saved the student’s name
+      const nameKey = 'studentName';
+      // Retrieve the name from localStorage
+      const studentName = localStorage.getItem(nameKey);
+      // If a name exists, update the welcome heading
+      if (studentName) {
+        const welcomeEl = document.getElementById('welcome');
+        welcomeEl.textContent = `Welcome, ${studentName}!`;
+      }
+    })();
+  </script>
+</body>
+
 
   <div class="timetable-container">
     <h2>📘 Grade 5 Weekly Planner</h2>
